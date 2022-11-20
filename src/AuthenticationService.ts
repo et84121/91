@@ -1,6 +1,5 @@
 import { IFailedCounter } from './FailedCounter';
-import { IHash } from './hashAdapter';
-import { ILogger } from './logger';
+import { IHash } from './HashAdapter';
 import { IOtp } from './OtpAdapter';
 import { IProfileRepo } from './ProfileRepo';
 
@@ -9,40 +8,32 @@ export class AuthenticationService implements IAuth {
     private _hash: IHash,
     private _otp: IOtp,
     private _profileRepo: IProfileRepo,
-    private _failedCounter: IFailedCounter,
-    private _logger: ILogger
+    private _failedCounter: IFailedCounter
   ) {}
 
   async isVaild(
     accountId: string,
     password: string,
     otp: string
-  ): Promise<boolean> {
+  ): Promise<boolean> {    
+    const hashedPasswordFromDB = await this._profileRepo.GetPassword(accountId);
 
-    // setup db connection
-    const passwordFromDB = await this._profileRepo.getPasswordFromDb(accountId);
-
-    // setup crypt service
-    const hashedPassword = await this._hash.hashPassword(password);
+    const hashedPassword = await this._hash.HashString(password);
 
     // Get Account One Time Password
-    const currentOTP = await this._otp.getCurrentOtp(accountId);
+    const currentOTP = await this._otp.GetCurrentOtp(accountId);
 
-    if (!(passwordFromDB !== hashedPassword || currentOTP !== otp)) {
+    if (hashedPasswordFromDB === hashedPassword && currentOTP === otp) {
       // reset failed counter
-      await this._failedCounter.resetFailCount(accountId);
-
+      await this._failedCounter.ResetFailCount(accountId);
       return true;
     } else {
-      await this.LogCurrentFailedCount(accountId);
+      await this._failedCounter.AddFailCount(accountId);
       return false;
     }
   }
 
-  private async LogCurrentFailedCount(accountId: string) {
-    await this._failedCounter.addFailCount(accountId);
-    this._logger.Info(`accountId:${accountId} failed times:{failedCount}`);
-  }
+ 
 }
 
 export interface IAuth {

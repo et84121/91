@@ -1,5 +1,5 @@
-export class hashAdapter implements IHash {
-  async hashPassword ( password: string )
+export class HashAdapter implements IHash {
+  async HashString ( password: string )
   {
     const encoder = new TextEncoder();
     const data = encoder.encode( password );
@@ -13,5 +13,5 @@ export class hashAdapter implements IHash {
 }
 
 export interface IHash {
-  hashPassword(password: string): Promise<string>;
+  HashString(password: string): Promise<string>;
 }

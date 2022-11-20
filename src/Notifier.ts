@@ -1,7 +1,7 @@
 import { SlackClient } from './libs/slackClient';
 
 export class SlackAdaptor implements INotifer {
-  async notify ( accountId: string )
+  async Notify ( accountId: string )
   {
     const message = `account:${ accountId } try to login failed`;
     const slackClient = new SlackClient( 'my api token' );
@@ -11,5 +11,5 @@ export class SlackAdaptor implements INotifer {
 }
 
 export interface INotifer {
-  notify(accountId: string): Promise<void>;
+  Notify(accountId: string): Promise<void>;
 }

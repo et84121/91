@@ -1,38 +1,53 @@
 export class FailedCounter implements IFailedCounter {
-  async resetFailCount ( accountId: string )
+  async GetCurrentFailedCount ( accountId: string ): Promise<number>
   {
-    const failedCounterRes = await fetch( 'api/failedCounter/Reset', {
+    const response = await fetch( 'api/failedCounter/count', {
       body: new URLSearchParams( { account: accountId } )
     } );
-    if ( !failedCounterRes.ok )
+    if ( !response.ok )
+    {
+      throw new Error( 'add failed counter error' );
+    }
+
+    const count = (await response.json())['data'] as number
+
+    return count
+  }
+  async ResetFailCount ( accountId: string )
+  {
+    const response = await fetch( 'api/failedCounter/Reset', {
+      body: new URLSearchParams( { account: accountId } )
+    } );
+    if ( !response.ok )
     {
       throw new Error( 'add failed counter error' );
     }
   }
 
-  async addFailCount ( accountId: string )
+  async AddFailCount ( accountId: string )
   {
-    const failedCounterRes = await fetch( 'api/failedCounter/Add', {
+    const response = await fetch( 'api/failedCounter/Add', {
       body: new URLSearchParams( { account: accountId } )
     } );
-    if ( !failedCounterRes.ok )
+    if ( !response.ok )
     {
       throw new Error( 'add failed counter error' );
     }
   }
 
-  async isLocked ( account: string )
+  async IsLocked ( account: string )
   {
-    const isLockedRes = await fetch( 'api/failedCounter/isLock', {
+    const response = await fetch( 'api/failedCounter/isLock', {
       method: 'GET',
       body: new URLSearchParams( { account } )
     } );
-    return isLockedRes.ok;
+    return response.ok;
   }
 }
 
 export interface IFailedCounter {
-  resetFailCount(accountId: string): Promise<void>;
-  addFailCount(accountId: string): Promise<void>;
-  isLocked(account: string): Promise<boolean>;
+  GetCurrentFailedCount (accountId: string): Promise<number>;
+  ResetFailCount(accountId: string): Promise<void>;
+  AddFailCount(accountId: string): Promise<void>;
+  IsLocked(account: string): Promise<boolean>;
 }

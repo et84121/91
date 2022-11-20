@@ -1,7 +1,7 @@
 import { setupDB } from './libs/db';
 
 export class ProfileRepo implements IProfileRepo {
-  async getPasswordFromDb ( account: string )
+  async GetPassword ( account: string )
   {
     const db = await setupDB();
 
@@ -13,5 +13,5 @@ export class ProfileRepo implements IProfileRepo {
 }
 
 export interface IProfileRepo {
-  getPasswordFromDb(account: string): Promise<string| undefined>;
+  GetPassword(account: string): Promise<string| undefined>;
 }

@@ -1,5 +1,5 @@
 export class OTPAdapter implements IOtp {
-  async getCurrentOtp ( accountId: string )
+  async GetCurrentOtp ( accountId: string )
   {
     const otpFromData = new FormData();
     otpFromData.append( 'account', accountId );
@@ -19,5 +19,5 @@ export class OTPAdapter implements IOtp {
 }
 
 export interface IOtp {
-  getCurrentOtp(accountId: string): Promise<string>;
+  GetCurrentOtp(accountId: string): Promise<string>;
 }
