@@ -104,6 +104,7 @@ function XXXDecorator(service:IService,instance:IClass):IClass{
 - [TC39 ECMAScript Decorators 提案](https://github.com/tc39/proposal-decorators) 終於進入 Stage 3.0 了
 - [TypeScript 5.0 預計實作 ECMAScript Decorators 提案](https://github.com/microsoft/TypeScript/issues/51362)
   - [過時資訊] [是否应该在生產環境裡使用 TypeScript 的 Decorator?](https://www.zhihu.com/question/404724504)
+  - 上面這個問題其實也大幅影響到 Vue 3 開發時的 API 設計，從 Class based 轉向 Compsition API。 [詳情](https://zhuanlan.zhihu.com/p/68477600)
 
 ### 其它補充
 
