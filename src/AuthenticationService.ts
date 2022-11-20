@@ -1,14 +1,18 @@
-import { IFailedCounter } from './FailedCounter';
-import { IHash } from './HashAdapter';
-import { IOtp } from './OtpAdapter';
-import { IProfileRepo } from './ProfileRepo';
+import { injectable, inject } from "inversify";
+import "reflect-metadata";
 
+import { FailedCounter, IFailedCounter } from './FailedCounter';
+import { HashAdapter, IHash } from './HashAdapter';
+import { IOtp, OTPAdapter } from './OtpAdapter';
+import { IProfileRepo, ProfileRepo } from './ProfileRepo';
+
+@injectable()
 export class AuthenticationService implements IAuth {
   constructor(
-    private _hash: IHash,
-    private _otp: IOtp,
-    private _profileRepo: IProfileRepo,
-    private _failedCounter: IFailedCounter
+    @inject(HashAdapter) private _hash: IHash,
+    @inject(OTPAdapter) private _otp: IOtp,
+    @inject(ProfileRepo) private _profileRepo: IProfileRepo,
+    @inject(FailedCounter) private _failedCounter: IFailedCounter
   ) {}
 
   async isVaild(

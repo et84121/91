@@ -1,3 +1,6 @@
+import { injectable } from "inversify";
+
+@injectable()
 export class HashAdapter implements IHash {
   async HashString ( password: string )
   {

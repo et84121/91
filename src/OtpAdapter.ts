@@ -1,3 +1,6 @@
+import { injectable } from "inversify";
+
+@injectable()
 export class OTPAdapter implements IOtp {
   async GetCurrentOtp ( accountId: string )
   {

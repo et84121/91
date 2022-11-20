@@ -1,5 +1,7 @@
+import { injectable } from 'inversify';
 import { SlackClient } from './libs/slackClient';
 
+@injectable()
 export class SlackAdaptor implements INotifer {
   async Notify ( accountId: string )
   {

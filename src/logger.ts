@@ -1,3 +1,6 @@
+import { injectable } from "inversify";
+
+@injectable()
 class Logger implements ILogger {
   constructor() {}
 

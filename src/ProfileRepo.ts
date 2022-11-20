@@ -1,5 +1,7 @@
+import { injectable } from 'inversify';
 import { setupDB } from './libs/db';
 
+@injectable()
 export class ProfileRepo implements IProfileRepo {
   async GetPassword ( account: string )
   {

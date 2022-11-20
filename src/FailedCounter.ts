@@ -1,3 +1,6 @@
+import { injectable } from "inversify";
+
+@injectable()
 export class FailedCounter implements IFailedCounter {
   async GetCurrentFailedCount ( accountId: string ): Promise<number>
   {
