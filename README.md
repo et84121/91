@@ -121,3 +121,20 @@ function XXXDecorator(service:IService,instance:IClass):IClass{
 - <https://inversify.io/>
 - <https://github.com/microsoft/tsyringe>
 - <https://github.com/nicojs/typed-inject>
+
+- 最後選了 inversify 嘗試，但似乎不能 bind decorator，只能 `手動` 或是使用 `原生 Decorator` 了
+- 可以用 `yarn dev` bundle 和跑跑看，但實際上跑不完
+
+## Tech Stack
+
+- `yarn` - package manager
+- `Parcel` - Bundler
+- `TypeScript`
+- `Jest` with `Ts-Jest` - Test Framework
+- `Prettier` - Formatter
+
+### 指令
+
+- `yarn install` - install package
+- `yarn dev` - bundle and run
+- `yarn test` - running test
