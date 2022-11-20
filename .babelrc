@@ -1,0 +1,14 @@
+{
+  "presets": [
+    "env"
+
+  ],
+  "plugins": [
+    "transform-runtime"
+  ],
+  "parserOpts": {
+    "plugins": [
+      "dynamicImport"
+    ]
+  }
+}
